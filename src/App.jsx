@@ -2,7 +2,7 @@ import "./App.css";
 function App() {
   const handleAddProduct = (e) => {
     e.preventDefault();
-    const form = form.target;
+    const form = e.target;
     const name = e.target.name.value;
     const price = e.target.price.value;
     const products = { name, price };
