@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Products = () => {
   const loadedProducts = useLoaderData();
-  const [products, setProducts] = useState(loadedProducts)
+  const [products, setProducts] = useState(loadedProducts);
   const handleDelete = (id) => {
     console.log(id);
     fetch(`http://localhost:7000/products/${id}`, {
@@ -14,8 +14,8 @@ const Products = () => {
         console.log(data);
         if (data.deletedCount > 0) {
           alert("successfully deleted");
-          const remaining = products.filter(product=> product._id !== id)
-          setProducts(remaining)
+          const remaining = products.filter((product) => product._id !== id);
+          setProducts(remaining);
         }
       });
   };
@@ -24,7 +24,11 @@ const Products = () => {
       <h1>Products:{products.length}</h1>
       {products.map((product) => (
         <p key={product._id}>
-          {product.name}{" "}
+          {product.name} {" "}
+          {product.price}
+          <Link to={`/update/${product._id}`}>
+            <button>Update</button>
+          </Link>
           <button onClick={() => handleDelete(product._id)}>x</button>
         </p>
       ))}
