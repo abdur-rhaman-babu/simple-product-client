@@ -8,8 +8,18 @@ const Update = () => {
         const form = e.target;
         const name = form.name.value;
         const price = form.price.value;
-        const product = {name, price}
-        console.log(product)
+        const updatedProduct = {name, price}
+        console.log(updatedProduct)
+
+        fetch(`http://localhost:7000/products/${loadedProduct._id}`,{
+            method:'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(updatedProduct)
+        })
+        .then(res=> res.json())
+        .then(data=> console.log(data))
     }
     return (
     <div>
